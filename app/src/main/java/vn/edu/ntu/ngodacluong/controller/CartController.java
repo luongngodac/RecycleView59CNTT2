@@ -34,6 +34,7 @@ public class CartController extends Application implements ICartController
         if(shoppingCart.contains(p))
             return false;
 
+
         shoppingCart.add(p);
         return true;
     }

@@ -2,6 +2,8 @@ package vn.edu.ntu.ngodacluong.recycleview59cntt2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.graphics.SumPathEffect;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +39,14 @@ public class ShoppingCartActivity extends AppCompatActivity {
         List<Product> shoppingCart;
         shoppingCart = controller.getShoppingCart();
         final StringBuilder builder = new StringBuilder();
-
+        int sum = 0;
         for (Product p:shoppingCart){
+            sum = sum + p.getPrice();
             builder.append(p.getName())
                     .append("\t\t\t")
                     .append(p.getPrice())
                     .append("VND\n");
-        }
+        }builder.append(sum).append("VND\n");
 
         if (builder.toString().length() > 0)
         {
@@ -53,15 +56,18 @@ public class ShoppingCartActivity extends AppCompatActivity {
             btnDelete = findViewById(R.id.btnDelete);
             //cai dat su kien.
             btnOK.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
 
-                    Toast toast=Toast.makeText(ShoppingCartActivity.this, "Da mua hang",   Toast.LENGTH_SHORT);
+                    Toast toast=Toast.makeText(ShoppingCartActivity.this, "" +
+                                    "Da mua hang",
+                            Toast.LENGTH_SHORT);
                     toast.show();
                     displayShoppingCart();
 
 //                    View v = View.findViewById(R.id.btnOK);
-                    txtShoppingCart.setText(" ");
+                    txtShoppingCart.setText("Không có mặt hàng nào trong giỏ hàng. Tiep tuc mua hang nao.");
 
                 }
             });
@@ -76,7 +82,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     txtShoppingCart.setText(" ");
                 }
             });
-
         }
         else
             txtShoppingCart.setText("Không có mặt hàng nào trong giỏ hàng.");
