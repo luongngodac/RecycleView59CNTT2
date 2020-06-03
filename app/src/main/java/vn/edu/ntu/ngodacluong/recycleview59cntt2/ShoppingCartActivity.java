@@ -3,7 +3,11 @@ package vn.edu.ntu.ngodacluong.recycleview59cntt2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -13,7 +17,7 @@ import vn.edu.ntu.ngodacluong.model.Product;
 public class ShoppingCartActivity extends AppCompatActivity {
     TextView txtShoppingCart;
     ICartController controller;
-
+    Button btnOK, btnDelete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
         List<Product> shoppingCart;
         shoppingCart = controller.getShoppingCart();
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
 
         for (Product p:shoppingCart){
             builder.append(p.getName())
@@ -42,7 +46,38 @@ public class ShoppingCartActivity extends AppCompatActivity {
         }
 
         if (builder.toString().length() > 0)
+        {
             txtShoppingCart.setText(builder.toString());
+
+            btnOK = findViewById(R.id.btnOK);
+            btnDelete = findViewById(R.id.btnDelete);
+            //cai dat su kien.
+            btnOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast toast=Toast.makeText(ShoppingCartActivity.this, "Da mua hang",   Toast.LENGTH_SHORT);
+                    toast.show();
+                    displayShoppingCart();
+
+//                    View v = View.findViewById(R.id.btnOK);
+                    txtShoppingCart.setText(" ");
+
+                }
+            });
+
+
+
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast toast =  Toast.makeText(ShoppingCartActivity.this, "Gio hang cua ban da trong.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    txtShoppingCart.setText(" ");
+                }
+            });
+
+        }
         else
             txtShoppingCart.setText("Không có mặt hàng nào trong giỏ hàng.");
     }
