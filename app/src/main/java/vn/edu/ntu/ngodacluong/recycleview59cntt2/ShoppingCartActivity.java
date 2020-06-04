@@ -46,7 +46,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     .append("\t\t\t")
                     .append(p.getPrice())
                     .append("VND\n");
-        }builder.append(sum).append("VND\n");
+        }builder.append("Tiền phải thanh toán là:\t\t").append(sum).append("VND\n");
 
         if (builder.toString().length() > 0)
         {
@@ -61,13 +61,13 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     Toast toast=Toast.makeText(ShoppingCartActivity.this, "" +
-                                    "Da mua hang",
+                                    "Bạn đã mua hàng thành công.",
                             Toast.LENGTH_SHORT);
                     toast.show();
                     displayShoppingCart();
 
 //                    View v = View.findViewById(R.id.btnOK);
-                    txtShoppingCart.setText("Không có mặt hàng nào trong giỏ hàng. Tiep tuc mua hang nao.");
+                    txtShoppingCart.setText("Không có mặt hàng nào trong giỏ hàng. Tiếp tục mua hàng nào.");
 
                 }
             });
@@ -77,7 +77,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast toast =  Toast.makeText(ShoppingCartActivity.this, "Gio hang cua ban da trong.", Toast.LENGTH_SHORT);
+                    Toast toast =  Toast.makeText(ShoppingCartActivity.this, "Giỏ hàng của bạn đã trống.", Toast.LENGTH_SHORT);
                     toast.show();
                     txtShoppingCart.setText(" ");
                 }
